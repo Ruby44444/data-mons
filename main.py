@@ -8,7 +8,7 @@ def getData():
     if format == 'gen9ou' or format == 'gen9doublesou':
         rank = pyip.inputMenu(["0", "1500", "1695", "1825"])
     else:
-        rank = pyip.inputMenu(["0", "1500", "1695", "1825"])
+        rank = pyip.inputMenu(["0", "1500", "1630", "1760"])
 
 
 
@@ -43,16 +43,16 @@ def getMon(mon):
 
     # Search for Pokémon names in the file
     for line in lines:
-        if count < 9:
+        if count < 9: #garde compte du nombre de la section actuelle
             check = bool(re.search(regex, line))
             if check or (count > 0):
                 if check or line == "+----------------------------------------+":
                     count += 1
                 match count:
-                    case 1:
+                    case 1: #Nombre d'utilisations du mon
                         if bool(re.search(r" [|] Raw count: \d* *[|] ", line)):
                             raw_usage = int(line.split().remove('%')[3])
-                    case 2:
+                    case 2: #Pourcentage de chaque talent
                         if not bool(re.search(r" [|] Abilities *[|] ", line)):
                             ability_index = re.search(r" [|] [a-zA-Z -]* *[|] ", line)
                             ability = line[ability_index[0]]
